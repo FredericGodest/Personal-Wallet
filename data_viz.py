@@ -1,4 +1,8 @@
-import plotly.figure_factory as ff
+"""
+This is the module for plotly figures creation.
+"""
+
+#IMPORTS
 import plotly.graph_objects as go
 import plotly.express as px
 
@@ -7,6 +11,12 @@ HEIGHT = 800
 WIDTH = 800
 
 def SunBursts(df)-> object:
+    """
+    This function is creating two different sunbursts from a given dataframe.
+
+    :param df: pandas dataframe
+    :return fig1, fig2: Two plotly sunbursts figures
+    """
     dividendes = int(df["Dividende/an"].sum())
     total_valorisation = int(df["Valorisation"].sum())
 
@@ -26,6 +36,12 @@ def SunBursts(df)-> object:
 
 
 def Benefice_Evolution(df)-> object:
+    """
+    This function is creating an area plot of the benefit based on a given dataframe.
+
+    :param df: pandas dataframe.
+    :return fig: plotly area figure
+    """
     max_val = int(df["Total valorisé"][df["Total valorisé"] != 0][-1])
 
     fig = px.area(df, x=df.index, y=["Total investi", "Différence valorisé/investi"],
@@ -38,6 +54,12 @@ def Benefice_Evolution(df)-> object:
     return fig
 
 def Epargne_Evolution(df)-> object:
+    """
+    This function is creating an bar plot of the saving based on a given dataframe.
+
+    :param df: pandas dataframe.
+    :return fig: plotly bar figure
+    """
     epargne = int(df["Epargné ce mois ci"].mean())
 
     fig = px.bar(df, x=df.index, y=["Epargné ce mois ci"],
@@ -50,6 +72,12 @@ def Epargne_Evolution(df)-> object:
     return fig
 
 def Patrimoine_Evolution(df)-> object:
+    """
+    This function is creating an area plot of the patrimony based on a given dataframe.
+
+    :param df: pandas dataframe.
+    :return fig: plotly area figure
+    """
     track_list = ["Comptes courants",
                   "Comptes sur livret",
                   "PEL",
@@ -68,6 +96,12 @@ def Patrimoine_Evolution(df)-> object:
     return fig
 
 def Waterfall_Perso(df)-> object:
+    """
+    This function is creating an waterfall chart of the depense based on a given dataframe.
+
+    :param df: pandas dataframe.
+    :return fig: plotly waterfall figure
+    """
     group = df.groupby(by=["Type"]).sum().sort_values(by="Valeur finale", ascending=False)
     measures = list(group.index)
     y = [int(group.iloc[i]["Valeur finale"]) for i in range(len(group))]
@@ -90,6 +124,12 @@ def Waterfall_Perso(df)-> object:
     return fig
 
 def Pie_Charge(df)-> object:
+    """
+    This function is creating an pie chart of the charges based on a given dataframe.
+
+    :param df: pandas dataframe.
+    :return fig: plotly pie figure
+    """
     charge = df[df["Type"] == "Charges"]
     fig = px.pie(charge, values='Final Abs', names='Description',
                  title='Répartitions des charges mensuelles',

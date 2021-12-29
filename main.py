@@ -1,3 +1,8 @@
+"""
+This is the main Dash Module which is combining get_data + data_viz modules.
+
+"""
+# IMPORTS
 from get_data import *
 from data_viz import *
 from dotenv import dotenv_values
@@ -6,12 +11,7 @@ import dash
 from dash import dcc
 from dash import html
 
-colors = {
-    'background': '#00000',
-    'text': '#00000'
-}
-
-#FIGs Creation
+# FIGs Creation
 dict_df = Getdata()
 fig_valorisation, fig_dividende = SunBursts(dict_df["Dividende"])
 fig_benefice = Benefice_Evolution(dict_df["Patrimoine"])
@@ -20,8 +20,10 @@ fig_waterflow = Waterfall_Perso(dict_df["Cash_Flow"])
 fig_charge = Pie_Charge(dict_df["Cash_Flow"])
 fig_epargne = Epargne_Evolution(dict_df["Patrimoine"])
 
+# DASH app creation
 app = dash.Dash(__name__)
 
+# DASH app Layout
 app.layout = html.Div(className='row', children=[
     html.H1(children="Dashboard de finances personelles",
         style={
@@ -79,6 +81,7 @@ app.layout = html.Div(className='row', children=[
 
 ])
 
+# App rendering
 if __name__ == '__main__':
     # PROD MOD
     if os.environ.get("ENV") == "PROD":
