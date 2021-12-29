@@ -22,6 +22,7 @@ fig_epargne = Epargne_Evolution(dict_df["Patrimoine"])
 
 # DASH app creation
 app = dash.Dash(__name__)
+server = app.server
 
 # DASH app Layout
 app.layout = html.Div(className='row', children=[
