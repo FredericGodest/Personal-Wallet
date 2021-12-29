@@ -2,11 +2,11 @@
 This is the module for plotly figures creation.
 """
 
-#IMPORTS
+# IMPORTS
 import plotly.graph_objects as go
 import plotly.express as px
 
-#CONSTANT
+# CONSTANTS
 HEIGHT = 800
 WIDTH = 800
 
