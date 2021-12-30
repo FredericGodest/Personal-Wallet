@@ -26,7 +26,7 @@ server = app.server
 
 # DASH app Layout
 app.layout = html.Div(className='row', children=[
-    html.H1(children="Dashboard de finances personelles",
+    html.H1(children="Dashboard de finances personnelles",
         style={
             'textAlign': 'center'
         }),
