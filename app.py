@@ -75,7 +75,7 @@ app.layout = html.Div(className='row', children=[
                   figure=fig_epargne),
         style={
             'textAlign': 'center',
-            'width': '100vw',
+            'width': '90vw',
             'height': '20vh'
         }
     ),
@@ -90,5 +90,5 @@ if __name__ == '__main__':
 
     # TEST MOD
     else:
-        app.run_server(host='0.0.0.0', port=4000, debug=True)
+        app.run_server(host='0.0.0.0', port=3000, debug=True)
 

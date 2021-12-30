@@ -63,7 +63,7 @@ def Epargne_Evolution(df)-> object:
     epargne = int(df["Epargné ce mois ci"].mean())
 
     fig = px.bar(df, x=df.index, y=["Epargné ce mois ci"],
-                 height=HEIGHT/2, width=WIDTH*2)
+                 width=WIDTH)
     fig.update_layout(title=f"Evolution de l'épargne mensuelle en fonction du temps (moyenne = {epargne}€)",
                       yaxis_title='Euros',
                       xaxis_title="Temps",
@@ -118,7 +118,7 @@ def Waterfall_Perso(df)-> object:
     ))
     fig.update_layout(title_text=f"Waterfall des cash flow (Reste à vivre = {reste}€)",
                       yaxis_title="Euros",
-                      height=HEIGHT, width=WIDTH,
+                      height=HEIGHT/2, width=WIDTH,
                       title_x=0.5)
 
     return fig
