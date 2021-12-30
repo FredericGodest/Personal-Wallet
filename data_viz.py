@@ -118,7 +118,7 @@ def Waterfall_Perso(df)-> object:
     ))
     fig.update_layout(title_text=f"Waterfall des cash flow (Reste à vivre = {reste}€)",
                       yaxis_title="Euros",
-                      height=HEIGHT/2, width=WIDTH,
+                      height=HEIGHT*2/3, width=WIDTH,
                       title_x=0.5)
 
     return fig
