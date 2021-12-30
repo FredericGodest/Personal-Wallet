@@ -60,10 +60,24 @@ def Epargne_Evolution(df)-> object:
     :param df: pandas dataframe.
     :return fig: plotly bar figure
     """
-    epargne = int(df["Epargné ce mois ci"].mean())
 
-    fig = px.bar(df, x=df.index, y=["Epargné ce mois ci"],
-                 width=WIDTH)
+    epargne = int(df["Epargné ce mois ci"].mean())
+    df["MA"] = df["Epargné ce mois ci"].rolling(window=4).mean()
+
+    fig = go.Figure()
+    fig.add_trace(go.Bar(
+        x=df.index,
+        y=df["Epargné ce mois ci"],
+        name='Epargne réelle',
+        marker_color='blue'
+    ))
+    fig.add_trace(go.Scatter(
+        x=df.index,
+        y=df["MA"],
+        name='Moyenne mobile',
+        marker_color='lightsalmon'
+    ))
+
     fig.update_layout(title=f"Evolution de l'épargne mensuelle en fonction du temps (moyenne = {epargne}€)",
                       yaxis_title='Euros',
                       xaxis_title="Temps",
