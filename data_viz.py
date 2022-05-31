@@ -24,12 +24,14 @@ def SunBursts(df)-> object:
                       values="Percent",
                       title=f'Répartition des valorisations en % (total = {total_valorisation}€)',
                       height=HEIGHT, width=WIDTH)
+    fig1.update_traces(textinfo='label+percent entry')
     fig1.update_layout(title_x=0.5)
 
     fig2 = px.sunburst(df, path=["Type", "Titre"],
                       values="Dividende/an",
                       title=f'Répartition des dividendes perçus en € (Dividendes annuels = {dividendes}€)',
                       height=HEIGHT, width=WIDTH)
+    fig2.update_traces(textinfo='label+value')
     fig2.update_layout(title_x=0.5)
 
     return fig1, fig2

@@ -42,7 +42,7 @@ app.layout = html.Div(className='row', children=[
             'textAlign': 'center'
         }
     ),
-    html.H2(children="Patrimoine et évolution de bénéfice",
+    html.H2(children="Evolution du patrimoine",
         style={
             'textAlign': 'center'
         }),
@@ -54,7 +54,7 @@ app.layout = html.Div(className='row', children=[
             'textAlign': 'center'
         }
     ),
-    html.H2(children="Waterflow et évaluation des charges",
+    html.H2(children="Waterfall et évaluation des charges",
         style={
             'textAlign': 'center'
         }),
@@ -90,5 +90,5 @@ if __name__ == '__main__':
 
     # TEST MOD
     else:
-        app.run_server(host='0.0.0.0', port=4001, debug=True)
+        app.run_server(host='0.0.0.0', port=4000, debug=True)
 
