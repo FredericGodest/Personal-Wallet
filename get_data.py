@@ -86,8 +86,10 @@ def GoogleSheet_Connection(sheet_name: str)-> object:
                 df = Clean_Googlesheet(df, column)
 
         df = df.replace(np.nan, 0)
-        df["Final Abs"] = df["Valeur finale"].abs()
-
+        try:
+            df["Final Abs"] = df["Valeur finale"].abs()
+        except KeyError:
+            pass
 
     return df
 
@@ -98,7 +100,7 @@ def Getdata()-> dict:
     :return dict: dictionnary of pandas dataframe.
     """
 
-    sheet_names = ["Dividende", "Patrimoine", "Cash_Flow"]
+    sheet_names = ["Dividende", "Patrimoine", "Cash_Flow", "Fondamentaux"]
     dict_df = {}
 
     for sheet_name in sheet_names:

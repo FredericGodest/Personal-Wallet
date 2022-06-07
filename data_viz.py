@@ -5,6 +5,10 @@ This is the module for plotly figures creation.
 # IMPORTS
 import plotly.graph_objects as go
 import plotly.express as px
+import numpy as np
+from dash import Dash, html
+import pandas as pd
+import plotly.figure_factory as ff
 
 # CONSTANTS
 HEIGHT = 800
@@ -156,3 +160,74 @@ def Pie_Charge(df)-> object:
     fig.update_layout(title_x=0.5)
 
     return fig
+
+
+def weighted_average(col_name, df):
+    sub_df = df.replace(np.nan, 0)
+    metric = sub_df[col_name].to_numpy()
+    valorisation = sub_df["Valorisation"].to_numpy()
+    average = np.average(metric, weights=valorisation)
+
+    return average
+
+
+def make_resume(df):
+    d_resume = {
+        "rendement dividende [%]": 0,
+        "payout ratio [%]": 0,
+        "capitalisation": 0,
+        "PER": 0,
+        "ROE": 0,
+        "ROA": 0,
+        "Marge Brute [%]": 0,
+        "Marge Nette [%]": 0,
+        "Beta": 0,
+        "Dette/Capitaux Propre": 0,
+        "EV": 0
+    }
+
+    for col_name in list(d_resume.keys()):
+        average = weighted_average(col_name, df)
+        d_resume[col_name] = average
+
+    return d_resume
+
+
+def generate_table(df):
+    col_list = [
+        "Titre",
+        "PER",
+        "payout ratio [%]",
+        "Marge Brute [%]",
+        "Marge Nette [%]",
+        "ROE",
+        "ROA",
+        "Dette/Capitaux Propre",
+        "Total point"
+    ]
+    df = df[col_list].set_index("Titre")
+    colorscale = [[0, '#4d004c'], [.5, '#f2e5ff'], [1, '#ffffff']]
+
+    fig = ff.create_table(df,
+                          colorscale=colorscale,
+                          height_constant=20,
+                          index=True)
+
+    fig.update_layout(
+        width=WIDTH * 4/3,
+    )
+
+    return fig
+
+def generate_resume_table(d):
+    df = pd.DataFrame.from_dict(d, orient='index')
+
+    colorscale = [[0, '#4d004c'], [.5, '#f2e5ff'], [1, '#ffffff']]
+
+    fig = ff.create_table(df,
+                          colorscale=colorscale,
+                          height_constant=20,
+                          index=True)
+
+    return fig
+
